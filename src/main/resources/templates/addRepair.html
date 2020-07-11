@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+<!--    <script>-->
+<!--        $(function(){-->
+<!--            $("#nameId").click(function(){-->
+<!--                //获得select选中的值，就是我们自己设定的id值-->
+<!--                var sno = $("#student").val();-->
+<!--                //通过id在去获得value值-->
+<!--                sno1 = $("#"+sno).html();-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-key"></span> 添加报修</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" th:action="@{/repair/addRepair}">
+            <div class="form-group">
+                <div class="label">
+                    <label >学号：</label>
+                </div>
+
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <select id="nameId" name="sno" class="input" style="width:25% ">
+                            <option value="0">--请选择学号--</option>
+                            <option name="sno" th:each="student:${students2}" th:text="${student.sno}" th:value="${student.sno}"></option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >学生姓名：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" name="sname" size="50" placeholder="请输入要报修的设备" data-validate="required:请输入要报修的设备" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >报修设备：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" name="rname" size="50" placeholder="请输入要报修的设备" data-validate="required:请输入要报修的设备" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label >报修原因：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="text" class="input w50"  name="rcase" size="50" placeholder="请输入报修原因" data-validate="required:请输入报修原因" />
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>报修时间：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="date" class="input w50" name="rtime" size="50" placeholder="请输入报修时间" data-validate="required:请输入报修时间" />
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >报修宿舍：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <select name="rhouse" class="input" style="width:25% ">
+                            <option value="0">--请选择宿舍号--</option>
+                            <option name="rhouse" th:each="student:${students2}" th:text="${student.house}" th:value="${student.house}"></option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="button bg-main icon-check-square-o" type="reset"> 重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body></html>
+

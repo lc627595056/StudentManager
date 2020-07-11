@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://39.99.146.121:3306/db_student?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+
+  thymeleaf:
+    cache: false                # 禁用掉thymeleaf的缓存，直接Ctrl+Shift+F9即可重启项目
+
+  messages:
+    basename: i18n.login        # 设置国际化的基础名，默认是类路径下的messages文件夹
+
+
+mybatis:
+  mapper-locations: /mapper/*Mapper.xml
+  type-aliases-package: com.abc.student.entity
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.student.mapper.RepairMapper">
+
+    <!--  查询所有报修信息  -->
+    <select id="findRepair" resultMap="RepairMap">
+        select * from repair
+    </select>
+
+    <resultMap id="RepairMap" type="com.abc.student.entity.Repair">
+        <id column="rid" property="rid"/>
+        <result column="st_sno" property="sno"/>
+        <result column="st_sname" property="sname"/>
+        <result column="r_name" property="rname"/>
+        <result column="r_case" property="rcase"/>
+        <result column="r_time" property="rtime"/>
+        <result column="house_num" property="rhouse"/>
+    </resultMap>
+
+<!--  添加报修信息  -->
+    <insert id="addRepair">
+        insert into repair(st_sno,st_sname,r_name,r_case,r_time,house_num) values(#{sno},#{sname},#{rname},#{rcase},#{rtime},#{rhouse})
+    </insert>
+
+<!--  根据sno查询报修信息  -->
+    <select id="findBySno" resultMap="RepairMap">
+        select * from repair where st_sno = #{sno}
+    </select>
+
+    <!--  修改报修信息  -->
+    <update id="updateRepair">
+        update repair set st_sname=#{sname},r_name=#{rname},r_case=#{rcase},r_time=#{rtime},house_num=#{rhouse} where st_sno = #{sno}
+    </update>
+
+<!--  删除报修信息  -->
+    <delete id="deleteRepair">
+        delete from repair where rid = #{rid}
+    </delete>
+
+<!--  学生登录查看属于自己的报修信息  -->
+    <select id="findRepairByStudent" resultMap="RepairMap">
+        select * from repair where st_sno = #{sno}
+    </select>
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.student.mapper.StudentMapper">
+
+<!--  学生登录检查  -->
+    <select id="loginstudent" resultMap="StudentMap">
+        select * from student where st_sno = #{sno} and st_password = #{password}
+    </select>
+
+    <!--查询全部的学生信息-->
+    <select id="findStudent" resultMap="StudentMap">
+        select * from student
+    </select>
+
+    <resultMap id="StudentMap" type="com.abc.student.entity.Student">
+        <id column="st_id" property="sid"/>
+        <result column="st_sno" property="sno"/>
+        <result column="st_name" property="sname"/>
+        <result column="st_password" property="spassword"/>
+        <result column="st_sex" property="sex"/>
+        <result column="st_col" property="college"/>
+        <result column="st_class" property="classes"/>
+        <result column="st_phone" property="phone"/>
+        <result column="house_num" property="house"/>
+    </resultMap>
+
+<!--  添加学生  -->
+    <insert id="addStudent">
+        insert into student(st_sno,st_name,st_password,st_sex,st_col,st_class,st_phone,house_num) values(#{sno},#{sname},#{spassword},#{sex},#{college},#{classes},#{phone},#{house})
+    </insert>
+
+<!--  根据学号查询单个学生信息  -->
+    <select id="findBySno" resultMap="StudentMap">
+        select * from student where st_sno = #{sno}
+    </select>
+
+    <!--  修改学生信息  -->
+    <update id="updateStudent">
+        update student set st_name=#{sname},st_password=#{spassword},st_sex=#{sex},st_col=#{college},st_class=#{classes},st_phone=#{phone},house_num=#{house} where st_sno = #{sno}
+    </update>
+
+<!--  删除学生信息  -->
+    <delete id="deleteStudent">
+        delete from student where st_sno = #{sno}
+    </delete>
+
+<!--  检查学生学号是否重复  -->
+    <select id="checkSno" resultMap="StudentMap">
+        select * from student where st_sno = #{sno}
+    </select>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.student.mapper.AnnounceMapper">
+
+    <!--  查询所有公告信息  -->
+    <select id="findAnnounce" resultType="com.abc.student.entity.Announce">
+        select * from announce
+    </select>
+
+    <!--  添加公告  -->
+    <insert id="addAnnounce">
+        insert into announce (anno_name,anno_content,anno_data) values (#{anno_name},#{anno_content},#{anno_data})
+    </insert>
+
+<!--  查看公告信息  -->
+    <select id="findById" resultType="com.abc.student.entity.Announce">
+        select * from announce where anno_id = #{anno_id}
+    </select>
+
+<!--  修改公告信息  -->
+    <update id="updateAnnounce">
+        update announce set anno_name=#{anno_name},anno_content=#{anno_content},anno_data=#{anno_data} where anno_id=#{anno_id}
+    </update>
+
+<!--  删除公告信息  -->
+    <delete id="deleteAnnounce">
+        delete from announce where anno_id = #{anno_id}
+    </delete>
+
+</mapper>

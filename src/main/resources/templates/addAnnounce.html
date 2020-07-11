@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+
+<!--    <script>-->
+<!--        function tianjia()-->
+<!--        {-->
+<!--            var str = confirm("是否确定添加此栏目？");-->
+<!--            if(str == true)-->
+<!--            {-->
+<!--                alert("确定添加！");-->
+<!--            }-->
+<!--            else-->
+<!--            {-->
+<!--                alert("取消添加！");-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加公告</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" th:action="@{/announce/addAnnounce}">
+
+
+            <div class="form-group">
+                <div class="label">
+                    <label>公告名：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="" name="anno_name" data-validate="required:请输入姓名" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>公告内容：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" style="width: 500px;height: 100px;" name="anno_content" data-validate="required:请输入公告内容" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>公告时间：</label>
+                </div>
+                <div class="field">
+                    <input type="date" class="input w50" name="anno_data" data-validate="required:请输入日期" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit" > 提交</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="button bg-main icon-check-square-o" type="reset"> 重置</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

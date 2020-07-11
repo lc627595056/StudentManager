@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-key"></span> 信息如下</strong></div>
+    <div class="body-content" style="font-size: 15px;">
+        <form method="post" class="form-x">
+            <div class="form-group">
+                <label >学号：&nbsp;&nbsp;&nbsp; [[${student.sno}]]</label>
+            </div>
+            <div class="form-group">
+                <label>姓名：&nbsp;&nbsp;&nbsp;[[${student.sname}]]</label>
+            </div>
+            <div class="form-group">
+                <label>性别：&nbsp;&nbsp;&nbsp;[[${student.sex}]]</label>
+            </div>
+            <div class="form-group">
+                <label>专业：&nbsp;&nbsp;&nbsp;[[${student.college}]]</label>
+            </div>
+
+            <div class="form-group">
+                <label>班级：&nbsp;&nbsp;&nbsp; [[${student.classes}]]</label>
+            </div>
+            <div class="form-group">
+                <label>手机号：&nbsp;&nbsp;&nbsp;[[${student.phone}]]</label>
+            </div>
+            <div class="form-group">
+                <label >宿舍号：&nbsp;&nbsp;&nbsp; [[${student.house}]]</label>
+            </div>
+        </form>
+    </div>
+</div>
+</body></html>

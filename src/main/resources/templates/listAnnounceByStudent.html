@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+</head>
+<body>
+<form method="post" action="" id="listform">
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder"> 公告管理</strong></div>
+        <table class="table table-hover text-center">
+            <tr>
+                <th width="5%">序号</th>
+                <th width="10%">公告名称</th>
+                <th width="55%">公告内容</th>
+                <th width="15%">公告时间</th>
+            </tr>
+
+            <tr th:each="announce,announceStat:${announces}">
+                <td>[[${announceStat.index+1 }]]</td>
+                <td align="center">[[${announce.anno_name }]]</td>
+                <td align="center">[[${announce.anno_content }]]</td>
+                <td align="center">[[${announce.anno_data }]]</td>
+            </tr>
+
+            <tr>
+                <td colspan="5">
+                    <div class="pagelist">
+                        <a th:if="${pageInfo.isFirstPage==false}" th:href="@{/announce/goto_listAnnounceByStudent(pageNum=1)}">首页</a>
+                        <a th:if="${pageInfo.isFirstPage==true}" href="#">首页</a>
+
+                        <a th:if="${pageInfo.isFirstPage==false}" th:href="@{/announce/goto_listAnnounceByStudent(pageNum=${pageInfo.pageNum-1})}">上一页</a>
+                        <a th:if="${pageInfo.isFirstPage==true}" href="#">上一页</a>
+
+                        <!--页码遍历-->
+                        <th:block th:each="i :${#numbers.sequence(1, pageInfo.pages)}">
+                            <a th:href="@{/announce/goto_listAnnounceByStudent(pageNum=${i})}">
+                                <!--当前页样式为on-->
+                                <span th:class="${pageInfo.pageNum == i}? 'on' :''">
+                                    <th:block th:text="${i}"></th:block>
+                                </span>
+                            </a>
+                        </th:block>
+
+                        <a th:if="${pageInfo.isLastPage==false}" th:href="@{/announce/goto_listAnnounceByStudent(pageNum=${pageInfo.pageNum+1})}">下一页</a>
+                        <a th:if="${pageInfo.isLastPage==true}" href="#">下一页</a>
+
+                        <a th:if="${pageInfo.isLastPage==false}" th:href="@{/announce/goto_listAnnounceByStudent(pageNum=${pageInfo.pages})}">尾页</a>
+                        <a th:if="${pageInfo.isLastPage==true}" href="#">尾页</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body></html>

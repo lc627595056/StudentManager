@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.student.mapper.AbsenceMapper">
+
+    <!--  查询所有缺勤记录  -->
+    <select id="findAbsence" resultType="com.abc.student.entity.Absence">
+        select * from absence
+    </select>
+
+<!--  添加缺勤记录  -->
+    <insert id="addAbsence">
+        insert into absence(st_sno,st_name,st_sex,st_class,house_num,ab_time,wr_person) values(#{st_sno},#{st_name},#{st_sex},#{st_class},#{house_num},#{ab_time},#{wr_person})
+    </insert>
+
+<!--  根据sno查询学生缺勤信息  -->
+    <select id="findBySno" resultType="com.abc.student.entity.Absence">
+        select * from absence where st_sno = #{st_sno}
+    </select>
+
+    <!--  修改指定sno的学生的缺勤记录  -->
+    <update id="updateAbsence">
+        update absence set st_sno=#{st_sno},st_name=#{st_name},st_sex=#{st_sex},st_class=#{st_class},
+        house_num=#{house_num},ab_time=#{ab_time},wr_person=#{wr_person} where st_sno = #{st_sno}
+    </update>
+
+<!--  删除指定学生的缺勤记录  -->
+    <delete id="deleteAbsence">
+        delete from absence where ab_id = #{ab_id}
+    </delete>
+
+<!--  学生登录时，查看自己的缺勤记录  -->
+    <select id="findAbsenceByStudent" resultType="com.abc.student.entity.Absence">
+        select * from absence where st_sno = #{sno}
+    </select>
+
+</mapper>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-key"></span> 修改缺勤记录</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" th:action="@{/absence/updateAbsence}">
+
+            <div class="form-group">
+                <div class="label">
+                    <label >学号：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        [[${absence.st_sno}]] <input type="hidden" th:value="${absence.st_sno}" name="st_sno">
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label >姓名：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        [[${absence.st_name}]] <input type="hidden" name="st_name" th:value="${absence.st_name}">
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label >性别：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="radio" name="st_sex" value="1" size="50" placeholder="请输入学生性别" data-validate="required:请输入学生性别" checked/>男
+                        <input type="radio" name="st_sex" value="0" size="50" placeholder="请输入学生性别" data-validate="required:请输入学生性别" />女
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label >班级：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="text" class="input w50"  name="st_class" size="50" th:value="${absence.st_class}" data-validate="required:请输入学生班级" />
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >宿舍号：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="text" class="input w50" name="house_num" size="50" th:value="${absence.house_num}" data-validate="required:请输入学生宿舍号" />
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >缺勤时间</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="date" class="input w50" name="ab_time" size="50" th:value="${absence.ab_time}"  data-validate="required:请输入缺勤时间">
+                    </label>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >记录人</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        [[${username}]] <input type="hidden" class="input w50" name="wr_person" th:value="${username}" size="50"/>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="button bg-main icon-check-square-o" type="reset"> 重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body></html>
+

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+
+    <script type="text/javascript">
+        //判断学号是否重复以及是否符合格式
+        function checkSno() {
+            $.post("/student/checkSno?sno="+$("#sno").val(),
+                function (data) {
+                    if (data == "exists"){
+                        alert("该学号的同学已存在，请添加其它的学号");
+                        //重置学号sno输入框
+                        $("#sno").val("");
+                    }else {
+                        var sno = $("#sno").val();
+                        var myreg=/^[1][7][4][8][0][4][0-9]{3}$/;
+                        if (!myreg.test(sno)) {
+                            alert("输入的学号格式不正确");
+                            $("#sno").val("");
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                });
+        }
+
+        //检测手机号
+        function checkPhone() {
+            var phone = $("#phone").val();
+            var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+            if (!myreg.test(phone)) {
+                alert("输入的手机号码格式不正确");
+                $("#phone").val("");
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+    </script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-key"></span> 添加学生</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" th:action="@{/student/addStudent}">
+            <div class="form-group">
+                <div class="label">
+                    <label >学号：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="number" class="input w50" id="sno" name="sno" size="50" placeholder="请输入学生学号" data-validate="required:请输入学生学号" onblur="checkSno()"/>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label >姓名：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="text" class="input w50" name="sname" size="50" placeholder="请输入学生姓名" data-validate="required:请输入学生姓名" />
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label >密码：</label>
+                </div>
+                <div class="field">
+                    <input type="password" class="input w50" name="spassword" size="50" placeholder="请输入学生登录密码" data-validate="required:请输入学生登录密码" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label >性别：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="radio" name="sex" value="1" size="50" placeholder="请输入学生性别" data-validate="required:请输入学生性别" checked/>男
+                        <input type="radio" name="sex" value="0" size="50" placeholder="请输入学生性别" data-validate="required:请输入学生性别" />女
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >专业：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="text" class="input w50" name="college" size="50" placeholder="请输入学生专业" data-validate="required:请输入学生专业" />
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >班级：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="text" class="input w50" name="classes" size="50" placeholder="请输入学生班级" data-validate="required:请输入学生班级" />
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >手机号：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="number" class="input w50" id="phone" name="phone" onblur="checkPhone()" size="50" placeholder="请输入学生手机号" data-validate="required:请输入学生手机号"/>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label >宿舍：</label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+                        <input type="text" class="input w50"  name="house" size="50" placeholder="请输入学生要住的宿舍" data-validate="required:请输入学生要住的宿舍" />
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="button bg-main icon-check-square-o" type="reset"> 重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body></html>

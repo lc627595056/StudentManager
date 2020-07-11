@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>学生信息</title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+    <script>
+        function del(rid){
+            if(confirm("您确定要删除吗?")){
+                alert("删除成功！");
+                window.location.href = "/repair/deleteRepair?rid=" + rid;
+            }else {
+                alert("删除失败");
+                window.location.reload();
+            }
+        }
+    </script>
+</head>
+<body>
+<form method="post" action="" id="listform">
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder"> 报修信息</strong>
+        </div>
+        <div class="padding border-bottom">
+            <ul class="search" style="padding-left:10px;">
+                <li><a class="button border-main icon-plus-square-o"
+                       th:href="@{/repair/goto_addRepair}"> 添加报修</a></li>
+            </ul>
+        </div>
+
+        <table class="table table-hover text-center">
+            <tr>
+                <th width="100" style="text-align:left; padding-left:20px;">序号</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>报修设备</th>
+                <th>报修原因</th>
+                <th>报修日期</th>
+                <th>报修宿舍</th>
+                <th width="310">操作</th>
+            </tr>
+            <tr th:each="repair,repairStat:${repairs}">
+                <td>[[${repairStat.index+1}]]</td>
+                <td>[[${repair.sno}]]</td>
+                <td>[[${repair.sname}]]</td>
+                <td>[[${repair.rname}]]</td>
+                <td>[[${repair.rcase}]]</td>
+                <td>[[${repair.rtime}]]</td>
+                <td>[[${repair.rhouse}]]</td>
+                <td>
+                        <div class="button-group">
+<!--                            <a class="button border-main" th:href="@{/repair/goto_addRepair}">-->
+<!--                                <span class="icon-plus-square-o"></span> 添加-->
+<!--                            </a>-->
+                            <a class="button border-main" th:href="@{/repair/findBySno(sno=${repair.sno})}">
+                                <span class="icon-edit"></span> 修改
+                            </a>
+                            <a class="button border-red" th:onclick="del([[${repair.rid}]]);">
+                                <span class="icon-trash-o"></span> 删除
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            <tr>
+                <td colspan="8">
+                    <div class="pagelist">
+                        <a th:if="${pageInfo.isFirstPage==false}" th:href="@{/repair/goto_listRepairByStudent(sno=${session.sno},pageNum=1)}">首页</a>
+                        <a th:if="${pageInfo.isFirstPage==true}" href="#">首页</a>
+
+                        <a th:if="${pageInfo.isFirstPage==false}" th:href="@{/repair/goto_listRepairByStudent(sno=${session.sno},pageNum=${pageInfo.pageNum-1})}">上一页</a>
+                        <a th:if="${pageInfo.isFirstPage==true}" href="#">上一页</a>
+
+                        <!--页码遍历-->
+                        <th:block th:each="i :${#numbers.sequence(1, pageInfo.pages)}">
+                            <a th:href="@{/repair/goto_listRepairByStudent(sno=${session.sno},pageNum=${i})}">
+                                <!--当前页样式为on-->
+                                <span th:class="${pageInfo.pageNum == i}? 'on' :''">
+                                    <th:block th:text="${i}"></th:block>
+                                </span>
+                            </a>
+                        </th:block>
+
+                        <a th:if="${pageInfo.isLastPage==false}" th:href="@{/repair/goto_listRepairByStudent(sno=${session.sno},pageNum=${pageInfo.pageNum+1})}">下一页</a>
+                        <a th:if="${pageInfo.isLastPage==true}" href="#">下一页</a>
+
+                        <a th:if="${pageInfo.isLastPage==false}" th:href="@{/repair/goto_listRepairByStudent(sno=${session.sno},pageNum=${pageInfo.pages})}">尾页</a>
+                        <a th:if="${pageInfo.isLastPage==true}" href="#">尾页</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>
